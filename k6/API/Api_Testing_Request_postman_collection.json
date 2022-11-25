@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "97ffeef5-d32d-4b2e-96c6-57447096e91b",
+		"name": "Api Testing Request",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21938664"
+	},
+	"item": [
+		{
+			"name": "Get Request : All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/users?page=2",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Request : Single User With ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/users/{{value}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{value}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Request : Create Users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Dhyay\",\n    \"job\": \"QA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Request : User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"dhyay\",\n    \"job\" : \"QA.JR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/users/2",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Request : User",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"dhyay\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/users/2",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Header Information",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/users?page=2",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Options",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    pm.test(\"JSON Schema Name Validations\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Dhyay\");",
+							"});",
+							"pm.test(\"JSON Schema Job Validations\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.job).to.eql(\"QA\");",
+							"});",
+							"",
+							"",
+							"var schema = {",
+							"    \"$schema\": \"https://json-schema.org/draft-07/schema\",",
+							"    \"$id\": \"http://example.com/example.json\",",
+							"    \"type\": \"object\",",
+							"    \"default\": {},",
+							"    \"required\": [",
+							"        \"name\",",
+							"        \"job\",",
+							"        \"id\",",
+							"        \"createdAt\"",
+							"    ],",
+							"    \"properties\": {",
+							"        \"name\": {",
+							"            \"type\": \"string\",",
+							"            \"default\": \"\",",
+							"            \"examples\": [",
+							"                \"Dhyay\"",
+							"            ]",
+							"        },",
+							"        \"job\": {",
+							"            \"type\": \"string\",",
+							"            \"default\": \"\",",
+							"            \"examples\": [",
+							"                \"QA\"",
+							"            ]",
+							"        },",
+							"        \"id\": {",
+							"            \"type\": \"string\",",
+							"            \"default\": \"\",",
+							"            \"examples\": [",
+							"                \"426\"",
+							"            ]",
+							"        },",
+							"        \"createdAt\": {",
+							"            \"type\": \"string\",",
+							"            \"default\": \"\",",
+							"            \"examples\": [",
+							"                \"2022-06-22T06:00:51.203Z\"",
+							"            ]",
+							"        }",
+							"    },",
+							"    \"examples\": [{",
+							"        \"name\": \"Dhyay\",",
+							"        \"job\": \"QA\",",
+							"        \"id\": \"426\",",
+							"        \"createdAt\": \"2022-06-22T06:00:51.203Z\"",
+							"    }]",
+							"};",
+							"var data1 = pm.response.json();",
+							"pm.test('Schema is Valid' , function(){",
+							"    pm.expect(tv4.validate(data1,$schema)).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "randomnumber",
+						"value": "{{$randomInt}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Dhyay\",\n    \"job\": \"QA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/users",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

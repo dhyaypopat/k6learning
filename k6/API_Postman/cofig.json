@@ -1,0 +1,6 @@
+{
+    "output": "script_echo.js",
+    "k6-params": "config/k6-params.json",
+    "environment": "config/envs/team.env.json",
+    "separate": true
+}
